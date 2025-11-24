@@ -48,7 +48,7 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define MODKEY Mod1Mask
+#define MODKEY Mod4Mask
 #define ALTKEY Mod1Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
@@ -62,7 +62,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "kitty", NULL };
 static const char *seconddisplaycmd[] = { "/usr/bin/env", "bash", "-c", "$HOME/downloads/second_display.sh", NULL };
 
 /* audio controls */
@@ -72,9 +72,8 @@ static const char *volmutecmd[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "t
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ ALTKEY,                       XK_space,      spawn,              {.v = dmenucmd } },
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ ALTKEY,                       XK_space,  spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
