@@ -84,6 +84,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *seconddisplaycmd[] = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/second_display.sh", NULL };
+static const char *filemanagercmd[] = { "kitty", "yazi", NULL };
 
 /* audio controls */
 static const char *volupcmd[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",    NULL };
@@ -127,6 +128,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 
 	{ MODKEY,                       XK_p,          spawn,              {.v = seconddisplaycmd } },
+	{ MODKEY,                       XK_a,          spawn,              {.v = filemanagercmd } },
 
 	/* vanity gaps shortcuts */
 	{ MODKEY|Mod4Mask,              XK_u,      incrgaps,       {.i = +1 } },
