@@ -5,10 +5,10 @@
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
-static const unsigned int gappih    = 6;       /* horiz inner gap between windows */
-static const unsigned int gappiv    = 6;       /* vert inner gap between windows */
-static const unsigned int gappoh    = 6;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 6;       /* vert outer gap between windows and screen edge */
+static const unsigned int gappih    = 5;       /* horiz inner gap between windows */
+static const unsigned int gappiv    = 5;       /* vert inner gap between windows */
+static const unsigned int gappoh    = 5;       /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 5;       /* vert outer gap between windows and screen edge */
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -36,6 +36,8 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+	{ "copyq",    "copyq",    NULL,       0,            1,           -1 },
+	{ "Gpick",    "gpick",    NULL,       0,            1,           -1 },
 };
 
 /* layout(s) */
@@ -68,8 +70,9 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define MODKEY Mod4Mask
-#define ALTKEY Mod1Mask
+#define MODKEY           Mod4Mask
+#define ALTKEY           Mod1Mask
+#define PRINTSCREEN      0xff61
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -85,6 +88,10 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 static const char *seconddisplaycmd[] = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/second_display.sh", NULL };
 static const char *filemanagercmd[] = { "kitty", "yazi", NULL };
+static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
+static const char *clipboardcmd[] = { "copyq", "show", NULL };
+static const char *colorpickerwindowcmd[] = { "gpick", NULL };
+static const char *colorpickercmd[] = { "gpick", "-p", NULL };
 
 /* audio controls */
 static const char *volupcmd[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",    NULL };
@@ -125,10 +132,16 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY|ShiftMask,             XK_q,       quit,          {0} },
 
 	{ MODKEY,                       XK_p,          spawn,              {.v = seconddisplaycmd } },
 	{ MODKEY,                       XK_a,          spawn,              {.v = filemanagercmd } },
+	{ 0,                            PRINTSCREEN,   spawn,              {.v = screenshotcmd } },
+	{ MODKEY|ShiftMask,             XK_s,          spawn,              {.v = screenshotcmd } },
+	{ MODKEY,                       XK_v,          spawn,              {.v = clipboardcmd } },
+	{ ALTKEY,                       XK_v,          spawn,              {.v = clipboardcmd } },
+	{ MODKEY|ShiftMask,             XK_c,          spawn,              {.v = colorpickerwindowcmd } },
+	{ MODKEY|ShiftMask,             XK_p,          spawn,              {.v = colorpickercmd } },
 
 	/* vanity gaps shortcuts */
 	{ MODKEY|Mod4Mask,              XK_u,      incrgaps,       {.i = +1 } },
