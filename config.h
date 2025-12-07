@@ -90,11 +90,13 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *seconddisplaycmd[] = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/second_display.sh", NULL };
-static const char *filemanagercmd[] = { "dolphin", NULL };
+/*static const char *filemanagercmd[] = { "dolphin", NULL };*/
+static const char *browsercmd[] = { "firefox", NULL };
 static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
 static const char *clipboardcmd[] = { "copyq", "show", NULL };
 static const char *colorpickerwindowcmd[] = { "gpick", NULL };
 static const char *colorpickercmd[] = { "gpick", "-p", NULL };
+static const char *soundmixercmd[] = { "st", "pulsemixer", NULL };
 
 /* audio controls */
 static const char *volupcmd[]   = { "/bin/sh", "-c", "pactl set-sink-volume 0 +5% && pkill -RTMIN+10 dwmblocks", NULL };
@@ -138,13 +140,14 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,       quit,          {0} },
 
 	{ MODKEY,                       XK_p,          spawn,              {.v = seconddisplaycmd } },
-	{ MODKEY,                       XK_a,          spawn,              {.v = filemanagercmd } },
+	{ MODKEY,                       XK_a,          spawn,              {.v = browsercmd } },
 	{ 0,                            PRINTSCREEN,   spawn,              {.v = screenshotcmd } },
 	{ MODKEY|ShiftMask,             XK_s,          spawn,              {.v = screenshotcmd } },
 	{ MODKEY,                       XK_v,          spawn,              {.v = clipboardcmd } },
 	{ ALTKEY,                       XK_v,          spawn,              {.v = clipboardcmd } },
 	{ MODKEY|ShiftMask,             XK_c,          spawn,              {.v = colorpickerwindowcmd } },
 	{ MODKEY|ShiftMask,             XK_p,          spawn,              {.v = colorpickercmd } },
+	{ MODKEY,                       XK_s,          spawn,              {.v = soundmixercmd } },
 
 	/* vanity gaps shortcuts */
 	{ MODKEY|Mod4Mask,              XK_u,      incrgaps,       {.i = +1 } },
