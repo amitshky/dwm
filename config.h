@@ -97,6 +97,7 @@ static const char *clipboardcmd[] = { "copyq", "show", NULL };
 static const char *colorpickerwindowcmd[] = { "gpick", NULL };
 static const char *colorpickercmd[] = { "gpick", "-p", NULL };
 static const char *soundmixercmd[] = { "st", "pulsemixer", NULL };
+static const char *powermenucmd[] = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/powermenu", NULL };
 
 /* audio controls */
 static const char *volupcmd[]   = { "/bin/sh", "-c", "pactl set-sink-volume 0 +5% && pkill -RTMIN+10 dwmblocks", NULL };
@@ -137,7 +138,8 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,       quit,          {0} },
+	{ MODKEY|ShiftMask|ControlMask, XK_q,       quit,          {0} },
+	{ MODKEY|ShiftMask,             XK_q,       spawn,         {.v = powermenucmd } },
 
 	{ MODKEY,                       XK_p,          spawn,              {.v = seconddisplaycmd } },
 	{ MODKEY,                       XK_a,          spawn,              {.v = browsercmd } },
