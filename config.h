@@ -1,5 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
+#include <X11/XF86keysym.h>
+
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -7,7 +9,7 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "JetBrainsMonoNLNerdFont:size=12" };
 static const char dmenufont[]       = "JetBrainsMonoNLNerdFont:size=12";
-static const char col_gray1[]       = "#222222";
+static const char col_gray1[]       = "#000000";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
@@ -29,6 +31,9 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+	{ "copyq",    "copyq",    NULL,       0,            1,           -1 },
+	{ "Gpick",    "gpick",    NULL,       0,            1,           -1 },
+	{ "discord",  "discord",  NULL,       1 << 8,       0,           -1 },
 };
 
 /* layout(s) */
@@ -48,6 +53,7 @@ static const Layout layouts[] = {
 /* key definitions */
 #define MODKEY Mod1Mask
 #define ALTKEY Mod1Mask
+#define PRINTSCREEN      0xff61
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -57,22 +63,32 @@ static const Layout layouts[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
+#define STATUSBAR "dwmblocks"
+
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, "-l", "5", "-i", NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *seconddisplaycmd[] = { "/usr/bin/env", "bash", "-c", "$HOME/downloads/second_display.sh", NULL };
+
+static const char *seconddisplaycmd[] = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/second_display.sh", NULL };
+/*static const char *filemanagercmd[] = { "dolphin", NULL };*/
+static const char *browsercmd[] = { "firefox", NULL };
+static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
+static const char *clipboardcmd[] = { "copyq", "show", NULL };
+static const char *colorpickerwindowcmd[] = { "gpick", NULL };
+static const char *colorpickercmd[] = { "gpick", "-p", NULL };
+static const char *soundmixercmd[] = { "st", "pulsemixer", NULL };
+static const char *powermenucmd[] = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/powermenu", NULL };
 
 /* audio controls */
-static const char *volupcmd[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",    NULL };
-static const char *voldowncmd[] = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%",    NULL };
-static const char *volmutecmd[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle", NULL };
+static const char *volupcmd[]   = { "/bin/sh", "-c", "pactl set-sink-volume 0 +5% && pkill -RTMIN+10 dwmblocks", NULL };
+static const char *voldowncmd[] = { "/bin/sh", "-c", "pactl set-sink-volume 0 -5% && pkill -RTMIN+10 dwmblocks", NULL };
+static const char *volmutecmd[] = { "/bin/sh", "-c", "pactl set-sink-mute 0 toggle && pkill -RTMIN+10 dwmblocks", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ ALTKEY,                       XK_space,      spawn,              {.v = dmenucmd } },
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ ALTKEY,                       XK_space,  spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -80,9 +96,11 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY,                       XK_Return, zoom,           {0} },
+	{ MODKEY,                       XK_z,      zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+	{ MODKEY,                       XK_q,      killclient,     {0} },
+	{ MODKEY|ShiftMask|ControlMask, XK_q,      quit,           {0} },
+	{ MODKEY|ShiftMask,             XK_q,      spawn,          {.v = powermenucmd } },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
@@ -94,6 +112,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -103,12 +122,21 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+
+	/* custom controls */
+	{ MODKEY,                       XK_a,          spawn,      {.v = browsercmd } },
+	{ 0,                            PRINTSCREEN,   spawn,      {.v = screenshotcmd } },
+	{ MODKEY|ShiftMask,             XK_s,          spawn,      {.v = screenshotcmd } },
+	{ MODKEY,                       XK_v,          spawn,      {.v = clipboardcmd } },
+	{ ALTKEY,                       XK_v,          spawn,      {.v = clipboardcmd } },
+	{ MODKEY|ShiftMask,             XK_c,          spawn,      {.v = colorpickerwindowcmd } },
+	{ MODKEY|ShiftMask,             XK_p,          spawn,      {.v = colorpickercmd } },
+	{ MODKEY,                       XK_s,          spawn,      {.v = soundmixercmd } },
 
 	/* audio controls */
-	{ 0,                            XF86XK_AudioRaiseVolume, spawn,    {.v = volupcmd } },
-	{ 0,                            XF86XK_AudioLowerVolume, spawn,    {.v = voldowncmd } },
-	{ 0,                            XF86XK_AudioMute,        spawn,    {.v = volmutecmd } },
+	{ 0,                  XF86XK_AudioRaiseVolume, spawn,      {.v = volupcmd } },
+	{ 0,                  XF86XK_AudioLowerVolume, spawn,      {.v = voldowncmd } },
+	{ 0,                  XF86XK_AudioMute,        spawn,      {.v = volmutecmd } },
 };
 
 /* button definitions */
