@@ -9,7 +9,7 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "JetBrainsMonoNLNerdFont:size=12" };
 static const char dmenufont[]       = "JetBrainsMonoNLNerdFont:size=12";
-static unsigned int baralpha        = 0xd0;
+static unsigned int baralpha        = 0xFF;
 static unsigned int borderalpha     = OPAQUE;
 static const char col_gray1[]       = "#000000";
 static const char col_gray2[]       = "#444444";
@@ -78,7 +78,7 @@ static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
 static const char *clipboardcmd[] = { "copyq", "show", NULL };
 static const char *colorpickerwindowcmd[] = { "gpick", NULL };
 static const char *colorpickercmd[] = { "gpick", "-p", NULL };
-static const char *soundmixercmd[] = { "st", "pulsemixer", NULL };
+static const char *soundmixercmd[] = { "st", "-e", "pulsemixer", NULL };
 static const char *powermenucmd[] = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/powermenu", NULL };
 
 /* audio controls */
