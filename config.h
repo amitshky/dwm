@@ -83,9 +83,9 @@ static const char *calendarcmd[] = { "st", "-e", "calcure", NULL };
 static const char *powermenucmd[] = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/powermenu", NULL };
 
 /* audio controls */
-static const char *volupcmd[]   = { "/bin/sh", "-c", "pactl set-sink-volume 0 +5% && pkill -RTMIN+10 dwmblocks", NULL };
-static const char *voldowncmd[] = { "/bin/sh", "-c", "pactl set-sink-volume 0 -5% && pkill -RTMIN+10 dwmblocks", NULL };
-static const char *volmutecmd[] = { "/bin/sh", "-c", "pactl set-sink-mute 0 toggle && pkill -RTMIN+10 dwmblocks", NULL };
+static const char *volupcmd[]   = { "/usr/bin/env", "bash", "-c", "pactl set-sink-volume 0 +5% && pkill -RTMIN+10 dwmblocks", NULL };
+static const char *voldowncmd[] = { "/usr/bin/env", "bash", "-c", "pactl set-sink-volume 0 -5% && pkill -RTMIN+10 dwmblocks", NULL };
+static const char *volmutecmd[] = { "/usr/bin/env", "bash", "-c", "pactl set-sink-mute 0 toggle && pkill -RTMIN+10 dwmblocks", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
