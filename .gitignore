@@ -1,4 +1,5 @@
 dwm
+core*
 *.o
 *.orig
 *.rej

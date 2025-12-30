@@ -79,6 +79,7 @@ static const char *clipboardcmd[] = { "copyq", "show", NULL };
 static const char *colorpickerwindowcmd[] = { "gpick", NULL };
 static const char *colorpickercmd[] = { "gpick", "-p", NULL };
 static const char *soundmixercmd[] = { "st", "-e", "pulsemixer", NULL };
+static const char *calendarcmd[] = { "st", "-e", "calcure", NULL };
 static const char *powermenucmd[] = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/powermenu", NULL };
 
 /* audio controls */
@@ -133,6 +134,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_c,          spawn,      {.v = colorpickerwindowcmd } },
 	{ MODKEY|ShiftMask,             XK_p,          spawn,      {.v = colorpickercmd } },
 	{ MODKEY,                       XK_s,          spawn,      {.v = soundmixercmd } },
+	{ MODKEY,                       XK_c,          spawn,      {.v = calendarcmd } },
 
 	/* audio controls */
 	{ 0,                  XF86XK_AudioRaiseVolume, spawn,      {.v = volupcmd } },
