@@ -74,12 +74,14 @@ static const char *termcmd[]  = { "st", NULL };
 
 /*static const char *filemanagercmd[] = { "dolphin", NULL };*/
 static const char *browsercmd[] = { "firefox", NULL };
+static const char *filemancmd[] = { "pcmanfm", NULL };
 static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
 static const char *clipboardcmd[] = { "copyq", "show", NULL };
-static const char *colorpickerwindowcmd[] = { "gpick", NULL };
+static const char *colorpickerwincmd[] = { "gpick", NULL };
 static const char *colorpickercmd[] = { "gpick", "-p", NULL };
-static const char *soundmixercmd[] = { "st", "-e", "pulsemixer", NULL };
+/*static const char *soundmixercmd[] = { "st", "-e", "pulsemixer", NULL };*/
 static const char *calendarcmd[] = { "st", "-e", "calcure", NULL };
+static const char *processmgrcmd[] = { "st", "-e", "btop", NULL };
 static const char *powermenucmd[] = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/powermenu", NULL };
 
 /* audio controls */
@@ -95,7 +97,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+	{ MODKEY,                       XK_o,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_z,      zoom,           {0} },
@@ -126,15 +128,16 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_9,                      8)
 
 	/* custom controls */
-	{ MODKEY,                       XK_a,          spawn,      {.v = browsercmd } },
+	{ MODKEY,                       XK_a,          spawn,      {.v = filemancmd } },
+	{ MODKEY,                       XK_s,          spawn,      {.v = browsercmd } },
 	{ 0,                            PRINTSCREEN,   spawn,      {.v = screenshotcmd } },
 	{ MODKEY|ShiftMask,             XK_s,          spawn,      {.v = screenshotcmd } },
 	{ MODKEY,                       XK_v,          spawn,      {.v = clipboardcmd } },
 	{ ALTKEY,                       XK_v,          spawn,      {.v = clipboardcmd } },
-	{ MODKEY|ShiftMask,             XK_c,          spawn,      {.v = colorpickerwindowcmd } },
+	{ MODKEY|ShiftMask,             XK_c,          spawn,      {.v = colorpickerwincmd } },
 	{ MODKEY|ShiftMask,             XK_p,          spawn,      {.v = colorpickercmd } },
-	{ MODKEY,                       XK_s,          spawn,      {.v = soundmixercmd } },
 	{ MODKEY,                       XK_c,          spawn,      {.v = calendarcmd } },
+	{ MODKEY,                       XK_Escape,     spawn,      {.v = processmgrcmd } },
 
 	/* audio controls */
 	{ 0,                  XF86XK_AudioRaiseVolume, spawn,      {.v = volupcmd } },
