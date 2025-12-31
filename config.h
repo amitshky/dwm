@@ -71,14 +71,17 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, "-l", "5", "-i", NULL };
 static const char *termcmd[]  = { "st", NULL };
-
-/*static const char *filemanagercmd[] = { "dolphin", NULL };*/
-static const char *browsercmd[] = { "firefox", NULL };
+// quick launch
 static const char *filemancmd[] = { "pcmanfm", NULL };
+static const char *browsercmd[] = { "firefox", NULL };
+
+// tools
 static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
 static const char *clipboardcmd[] = { "copyq", "show", NULL };
 static const char *colorpickerwincmd[] = { "gpick", NULL };
 static const char *colorpickercmd[] = { "gpick", "-p", NULL };
+
+// applications
 /*static const char *soundmixercmd[] = { "st", "-e", "pulsemixer", NULL };*/
 static const char *calendarcmd[] = { "st", "-e", "calcure", NULL };
 static const char *processmgrcmd[] = { "st", "-e", "btop", NULL };
