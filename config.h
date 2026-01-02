@@ -15,12 +15,18 @@ static const char col_gray1[]       = "#000000";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
+static const char col_gray5[]       = "#646464";
 static const char col_cyan[]        = "#005577";
 static const char col_red[]         = "#ff8282";
 static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_red  },
+	/*                   fg         bg          border   */
+	[SchemeNorm]     = { col_gray3, col_gray1,  col_gray2  },
+	[SchemeSel]      = { col_gray4, col_gray1,  col_red    },
+	[SchemeStatus]   = { col_gray3, col_gray1,  "#000000"  }, // Statusbar right {text,background,not used but cannot be empty}
+	[SchemeTagsSel]  = { col_gray4, col_cyan,   "#000000"  }, // Tagbar left selected {text,background,not used but cannot be empty}
+	[SchemeTagsNorm] = { col_gray5, col_gray1,  "#000000"  }, // Tagbar left unselected {text,background,not used but cannot be empty}
+	[SchemeInfoSel]  = { col_gray4, col_gray1,  "#000000"  }, // infobar middle  selected {text,background,not used but cannot be empty}
+	[SchemeInfoNorm] = { col_gray3, col_gray1,  "#000000"  }, // infobar middle  unselected {text,background,not used but cannot be empty}
 };
 
 /* tagging */
@@ -46,16 +52,16 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 static const int refreshrate = 120;  /* refresh rate (per second) for client move/resize */
 
 static const Layout layouts[] = {
-	/* symbol     arrange function */
-	{ "",      tile },    /* first entry is default */
-	{ "",      NULL },    /* no layout function means floating behavior */
-	{ "",      monocle },
+	/* symbol  arrange function */
+	{ "",     tile },    /* first entry is default */
+	{ "",     NULL },    /* no layout function means floating behavior */
+	{ "",     monocle },
 };
 
 /* key definitions */
-#define MODKEY Mod4Mask
-#define ALTKEY Mod1Mask
-#define PRINTSCREEN      0xff61
+#define MODKEY       Mod4Mask
+#define ALTKEY       Mod1Mask
+#define PRINTSCREEN  0xff61
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -76,19 +82,19 @@ static const char *filemancmd[] = { "pcmanfm", NULL };
 static const char *browsercmd[] = { "firefox", NULL };
 
 /* tools */
-static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
-static const char *clipboardcmd[] = { "copyq", "show", NULL };
-static const char *colorpickerwincmd[] = { "gpick", NULL };
+static const char *screenshotcmd[]  = { "flameshot", "gui", NULL };
+static const char *clipboardcmd[]   = { "copyq", "show", NULL };
 static const char *colorpickercmd[] = { "gpick", "-p", NULL };
 
 /* applications */
 /*static const char *soundmixercmd[] = { "st", "-e", "pulsemixer", NULL };*/
-static const char *calendarcmd[] = { "st", "-e", "calcure", NULL };
+static const char *calendarcmd[]   = { "st", "-e", "calcure", NULL };
 static const char *processmgrcmd[] = { "st", "-e", "btop", NULL };
+static const char *colorpickerwincmd[] = { "gpick", NULL };
 
 /* scripts */
 static const char *powermenucmd[] = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/powermenu", NULL };
-static const char *cleanupcmd[] = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/cleanup.sh", NULL };
+static const char *cleanupcmd[]   = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/cleanup.sh", NULL };
 
 /* audio controls */
 static const char *volupcmd[]   = { "/usr/bin/env", "bash", "-c", "pactl set-sink-volume 0 +5% && pkill -RTMIN+10 dwmblocks", NULL };
@@ -140,7 +146,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_s,          spawn,      {.v = screenshotcmd } },
 	{ MODKEY,                       XK_v,          spawn,      {.v = clipboardcmd } },
 	{ ALTKEY,                       XK_v,          spawn,      {.v = clipboardcmd } },
-	{ MODKEY|ShiftMask|ALTKEY,      XK_c,          spawn,      {.v = colorpickerwincmd } },
+	{ MODKEY|ShiftMask|ControlMask, XK_c,          spawn,      {.v = colorpickerwincmd } },
 	{ MODKEY|ShiftMask,             XK_c,          spawn,      {.v = colorpickercmd } },
 	{ MODKEY,                       XK_c,          spawn,      {.v = calendarcmd } },
 	{ MODKEY,                       XK_Escape,     spawn,      {.v = processmgrcmd } },
