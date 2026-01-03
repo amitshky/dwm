@@ -3,27 +3,27 @@
 #include <X11/XF86keysym.h>
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int snap      = 32;       /* snap pixel */
-static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "JetBrainsMonoNLNerdFont:size=12" };
-static const char dmenufont[]       = "JetBrainsMonoNLNerdFont:size=12";
-static unsigned int baralpha        = OPAQUE;
-static unsigned int borderalpha     = OPAQUE;
-static const char col_gray1[]       = "#000000";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_gray5[]       = "#646464";
-static const char col_cyan[]        = "#005577";
-static const char col_red[]         = "#ff8282";
-static const char *colors[][3]      = {
+static const unsigned int borderpx = 1;   /* border pixel of windows */
+static const unsigned int snap     = 32;  /* snap pixel */
+static const int showbar           = 1;   /* 0 means no bar */
+static const int topbar            = 1;   /* 0 means bottom bar */
+static const char *fonts[]         = { "JetBrainsMonoNLNerdFont:size=12" };
+static const char dmenufont[]      = "JetBrainsMonoNLNerdFont:size=12";
+static unsigned int baralpha       = OPAQUE;
+static unsigned int borderalpha    = OPAQUE;
+static const char col_gray1[]      = "#000000";
+static const char col_gray2[]      = "#3c3836";
+static const char col_gray3[]      = "#ebdbb2";
+static const char col_gray4[]      = "#fbf1c7";
+static const char col_gray5[]      = "#7c6f64";
+static const char col_blue[]       = "#076678";
+static const char col_purple[]     = "#b06285";
+static const char *colors[][3]     = {
 	/*                   fg         bg          border   */
 	[SchemeNorm]     = { col_gray3, col_gray1,  col_gray2  },
-	[SchemeSel]      = { col_gray4, col_gray1,  col_red    },
+	[SchemeSel]      = { col_gray4, col_gray1,  col_blue   },
 	[SchemeStatus]   = { col_gray3, col_gray1,  "#000000"  }, // Statusbar right {text,background,not used but cannot be empty}
-	[SchemeTagsSel]  = { col_gray4, col_cyan,   "#000000"  }, // Tagbar left selected {text,background,not used but cannot be empty}
+	[SchemeTagsSel]  = { col_gray4, col_blue,   "#000000"  }, // Tagbar left selected {text,background,not used but cannot be empty}
 	[SchemeTagsNorm] = { col_gray5, col_gray1,  "#000000"  }, // Tagbar left unselected {text,background,not used but cannot be empty}
 	[SchemeInfoSel]  = { col_gray4, col_gray1,  "#000000"  }, // infobar middle  selected {text,background,not used but cannot be empty}
 	[SchemeInfoNorm] = { col_gray3, col_gray1,  "#000000"  }, // infobar middle  unselected {text,background,not used but cannot be empty}
@@ -75,7 +75,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, "-l", "5", "-i", "-c", NULL };
+static const char *dmenucmd[] = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/dmenu.sh", NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 /* quick launch */
