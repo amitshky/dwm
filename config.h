@@ -17,7 +17,6 @@ static const char col_gray3[]      = "#ebdbb2";
 static const char col_gray4[]      = "#fbf1c7";
 static const char col_gray5[]      = "#7c6f64";
 static const char col_blue[]       = "#076678";
-static const char col_purple[]     = "#b06285";
 static const char *colors[][3]     = {
 	/*                   fg         bg          border   */
 	[SchemeNorm]     = { col_gray3, col_gray1,  col_gray2  },
@@ -37,11 +36,12 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "copyq",    "copyq",    NULL,       0,            1,           -1 },
-	{ "Gpick",    "gpick",    NULL,       0,            1,           -1 },
-	{ "discord",  "discord",  NULL,       1 << 8,       0,           -1 },
+	/* class          instance      title       tags mask   isfloating   monitor */
+	{ "Gimp",         NULL,         NULL,       0,          1,           -1 },
+	{ "copyq",        "copyq",      NULL,       0,          1,           -1 },
+	{ "Gpick",        "gpick",      NULL,       0,          1,           -1 },
+	{ "discord",      "discord",    NULL,       1 << 8,     0,           -1 },
+	{ "qalculate-qt", "qalculate",  NULL,       0,          1,           -1 },
 };
 
 /* layout(s) */
