@@ -77,6 +77,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, "-l", "5", "-i", NULL };
 static const char *termcmd[]  = { "st", NULL };
+
 /* quick launch */
 static const char *filemancmd[] = { "pcmanfm", NULL };
 static const char *browsercmd[] = { "firefox", NULL };
@@ -85,6 +86,7 @@ static const char *browsercmd[] = { "firefox", NULL };
 static const char *screenshotcmd[]  = { "flameshot", "gui", NULL };
 static const char *clipboardcmd[]   = { "copyq", "show", NULL };
 static const char *colorpickercmd[] = { "gpick", "-p", NULL };
+static const char *calculatorcmd[]  = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/calculator.sh", NULL };
 
 /* applications */
 /*static const char *soundmixercmd[] = { "st", "-e", "pulsemixer", NULL };*/
@@ -142,15 +144,16 @@ static const Key keys[] = {
 	/* custom keymaps */
 	{ MODKEY,                       XK_a,          spawn,      {.v = filemancmd } },
 	{ MODKEY,                       XK_s,          spawn,      {.v = browsercmd } },
-	{ 0,                            PRINTSCREEN,   spawn,      {.v = screenshotcmd } },
 	{ MODKEY|ShiftMask,             XK_s,          spawn,      {.v = screenshotcmd } },
+	{ 0,                            PRINTSCREEN,   spawn,      {.v = screenshotcmd } },
 	{ MODKEY,                       XK_v,          spawn,      {.v = clipboardcmd } },
 	{ ALTKEY,                       XK_v,          spawn,      {.v = clipboardcmd } },
-	{ MODKEY|ShiftMask|ControlMask, XK_c,          spawn,      {.v = colorpickerwincmd } },
-	{ MODKEY|ShiftMask,             XK_c,          spawn,      {.v = colorpickercmd } },
-	{ MODKEY,                       XK_c,          spawn,      {.v = calendarcmd } },
-	{ MODKEY,                       XK_Escape,     spawn,      {.v = processmgrcmd } },
+	{ MODKEY,                       XK_c,          spawn,      {.v = calculatorcmd } },
+	{ MODKEY|ControlMask,           XK_c,          spawn,      {.v = calendarcmd } },
 	{ MODKEY|ALTKEY,                XK_c,          spawn,      {.v = cleanupcmd } },
+	{ MODKEY|ShiftMask,             XK_c,          spawn,      {.v = colorpickercmd } },
+	{ MODKEY|ShiftMask|ControlMask, XK_c,          spawn,      {.v = colorpickerwincmd } },
+	{ MODKEY,                       XK_Escape,     spawn,      {.v = processmgrcmd } },
 
 	/* audio controls */
 	{ 0,                  XF86XK_AudioRaiseVolume, spawn,      {.v = volupcmd } },
