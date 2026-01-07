@@ -96,7 +96,7 @@ static const char *colorpickerwincmd[] = { "gpick", NULL };
 
 /* scripts */
 static const char *powermenucmd[] = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/powermenu", NULL };
-static const char *cleanupcmd[]   = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/cleanup.sh", NULL };
+static const char *cleanupcmd[]   = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/cleanup.sh && $HOME/dev/config/scripts/linux/volumeLevel.sh", NULL };
 
 /* audio controls */
 static const char *volupcmd[]   = { "/usr/bin/env", "bash", "-c", "pactl set-sink-volume 0 +5% && pkill -RTMIN+10 dwmblocks", NULL };
