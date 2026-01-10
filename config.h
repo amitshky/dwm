@@ -99,9 +99,9 @@ static const char *powermenucmd[] = { "/usr/bin/env", "bash", "-c", "$HOME/dev/c
 static const char *cleanupcmd[]   = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/cleanup.sh && $HOME/dev/config/scripts/linux/volumeLevel.sh", NULL };
 
 /* audio controls */
-static const char *volupcmd[]   = { "/usr/bin/env", "bash", "-c", "pactl set-sink-volume 0 +5% && pkill -RTMIN+10 dwmblocks", NULL };
-static const char *voldowncmd[] = { "/usr/bin/env", "bash", "-c", "pactl set-sink-volume 0 -5% && pkill -RTMIN+10 dwmblocks", NULL };
-static const char *volmutecmd[] = { "/usr/bin/env", "bash", "-c", "pactl set-sink-mute 0 toggle && pkill -RTMIN+10 dwmblocks", NULL };
+static const char *volupcmd[]   = { "/usr/bin/env", "bash", "-c", "pactl set-sink-volume 0 +5%", NULL };
+static const char *voldowncmd[] = { "/usr/bin/env", "bash", "-c", "pactl set-sink-volume 0 -5%", NULL };
+static const char *volmutecmd[] = { "/usr/bin/env", "bash", "-c", "pactl set-sink-mute 0 toggle", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
