@@ -3,7 +3,7 @@
 #include <X11/XF86keysym.h>
 
 /* appearance */
-static const unsigned int borderpx = 1;   /* border pixel of windows */
+static const unsigned int borderpx = 3;   /* border pixel of windows */
 static const unsigned int snap     = 32;  /* snap pixel */
 static const int showbar           = 1;   /* 0 means no bar */
 static const int topbar            = 1;   /* 0 means bottom bar */
@@ -42,6 +42,7 @@ static const Rule rules[] = {
 	{ "Gpick",        "gpick",      NULL,       0,          1,           -1 },
 	{ "discord",      "discord",    NULL,       1 << 8,     0,           -1 },
 	{ "qalculate-qt", "qalculate",  NULL,       0,          1,           -1 },
+	{ "krename",      "krename",    NULL,       0,          1,           -1 },
 };
 
 /* layout(s) */
@@ -87,6 +88,7 @@ static const char *screenshotcmd[]  = { "flameshot", "gui", NULL };
 static const char *clipboardcmd[]   = { "copyq", "show", NULL };
 static const char *colorpickercmd[] = { "gpick", "-p", NULL };
 static const char *calculatorcmd[]  = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/calculator.sh", NULL };
+static const char *renamecmd[]  = { "krename", NULL };
 
 /* applications */
 /*static const char *soundmixercmd[] = { "st", "-e", "pulsemixer", NULL };*/
@@ -154,6 +156,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_c,          spawn,      {.v = colorpickercmd } },
 	{ MODKEY|ShiftMask|ControlMask, XK_c,          spawn,      {.v = colorpickerwincmd } },
 	{ MODKEY,                       XK_Escape,     spawn,      {.v = processmgrcmd } },
+	{ MODKEY,                       XK_F2,         spawn,      {.v = renamecmd } },
 
 	/* audio controls */
 	{ 0,                  XF86XK_AudioRaiseVolume, spawn,      {.v = volupcmd } },
@@ -164,21 +167,22 @@ static const Key keys[] = {
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
-	/* click                event mask      button          function        argument */
-	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
-	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 1} },
-	{ ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} },
-	{ ClkStatusText,        0,              Button3,        sigstatusbar,   {.i = 3} },
-	{ ClkStatusText,        0,              Button4,        sigstatusbar,   {.i = 4} }, // scroll up
-	{ ClkStatusText,        0,              Button5,        sigstatusbar,   {.i = 5} }, // scroll down
-	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
-	{ ClkTagBar,            0,              Button1,        view,           {0} },
-	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
-	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
-	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+	/* click                event mask         button          function        argument */
+	{ ClkLtSymbol,          0,                 Button1,        setlayout,      {0} },
+	{ ClkLtSymbol,          0,                 Button3,        setlayout,      {.v = &layouts[2]} },
+	{ ClkWinTitle,          0,                 Button2,        zoom,           {0} },
+	{ ClkStatusText,        0,                 Button1,        sigstatusbar,   {.i = 1} },
+	{ ClkStatusText,        0,                 Button2,        sigstatusbar,   {.i = 2} },
+	{ ClkStatusText,        0,                 Button3,        sigstatusbar,   {.i = 3} },
+	{ ClkStatusText,        0,                 Button4,        sigstatusbar,   {.i = 4} }, // scroll up
+	{ ClkStatusText,        0,                 Button5,        sigstatusbar,   {.i = 5} }, // scroll down
+	{ ClkClientWin,         MODKEY,            Button1,        movemouse,      {0} },
+	{ ClkClientWin,         MODKEY,            Button2,        killclient,     {0} },
+	{ ClkClientWin,         MODKEY|ShiftMask,  Button2,        togglefloating, {0} },
+	{ ClkClientWin,         MODKEY,            Button3,        resizemouse,    {0} },
+	{ ClkTagBar,            0,                 Button1,        view,           {0} },
+	{ ClkTagBar,            0,                 Button3,        toggleview,     {0} },
+	{ ClkTagBar,            MODKEY,            Button1,        tag,            {0} },
+	{ ClkTagBar,            MODKEY,            Button3,        toggletag,      {0} },
 };
 
