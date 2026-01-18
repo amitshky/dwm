@@ -41,8 +41,10 @@ static const Rule rules[] = {
 	{ "copyq",        "copyq",      NULL,       0,          1,           -1 },
 	{ "Gpick",        "gpick",      NULL,       0,          1,           -1 },
 	{ "discord",      "discord",    NULL,       1 << 8,     0,           -1 },
+	{ "firetify",     NULL,         NULL,       1 << 8,     0,           -1 }, // firefox with spotify opened
 	{ "qalculate-qt", "qalculate",  NULL,       0,          1,           -1 },
 	{ "krename",      "krename",    NULL,       0,          1,           -1 },
+	{ "st",           "floatst",    NULL,       0,          1,           -1 },
 };
 
 /* layout(s) */
@@ -78,6 +80,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/dmenu.sh", NULL };
 static const char *termcmd[]  = { "st", NULL };
+static const char *floattermcmd[]  = { "st", "-n", "floatst", NULL };
 
 /* quick launch */
 static const char *filemancmd[] = { "pcmanfm", NULL };
@@ -104,11 +107,18 @@ static const char *cleanupcmd[]   = { "/usr/bin/env", "bash", "-c", "$HOME/dev/c
 static const char *volupcmd[]   = { "/usr/bin/env", "bash", "-c", "pactl set-sink-volume 0 +5%", NULL };
 static const char *voldowncmd[] = { "/usr/bin/env", "bash", "-c", "pactl set-sink-volume 0 -5%", NULL };
 static const char *volmutecmd[] = { "/usr/bin/env", "bash", "-c", "pactl set-sink-mute 0 toggle", NULL };
+static const char *mediaplaycmd[] = { "/usr/bin/env", "bash", "-c", "playerctl play-pause", NULL };
+static const char *medianextcmd[] = { "/usr/bin/env", "bash", "-c", "playerctl next", NULL };
+static const char *mediaprevcmd[] = { "/usr/bin/env", "bash", "-c", "playerctl prev", NULL };
+static const char *mediastopcmd[] = { "/usr/bin/env", "bash", "-c", "playerctl stop", NULL };
+static const char *brightnessupcmd[] = { "/usr/bin/env", "bash", "-c", "brightnessctl set +10%", NULL };
+static const char *brightnessdwcmd[] = { "/usr/bin/env", "bash", "-c", "brightnessctl set 10%-", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ ALTKEY,                       XK_space,  spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = floattermcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -157,11 +167,18 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask|ControlMask, XK_c,          spawn,      {.v = colorpickerwincmd } },
 	{ MODKEY,                       XK_Escape,     spawn,      {.v = processmgrcmd } },
 	{ MODKEY,                       XK_F2,         spawn,      {.v = renamecmd } },
+	{ MODKEY,                       XK_r,          spawn,      {.v = renamecmd } },
 
-	/* audio controls */
-	{ 0,                  XF86XK_AudioRaiseVolume, spawn,      {.v = volupcmd } },
-	{ 0,                  XF86XK_AudioLowerVolume, spawn,      {.v = voldowncmd } },
-	{ 0,                  XF86XK_AudioMute,        spawn,      {.v = volmutecmd } },
+	/* media controls */
+	{ 0,                XF86XK_AudioRaiseVolume,   spawn,      {.v = volupcmd } },
+	{ 0,                XF86XK_AudioLowerVolume,   spawn,      {.v = voldowncmd } },
+	{ 0,                XF86XK_AudioMute,          spawn,      {.v = volmutecmd } },
+	{ 0,                XF86XK_AudioPlay,          spawn,      {.v = mediaplaycmd } },
+	{ 0,                XF86XK_AudioNext,          spawn,      {.v = medianextcmd } },
+	{ 0,                XF86XK_AudioPrev,          spawn,      {.v = mediaprevcmd } },
+	{ 0,                XF86XK_AudioStop,          spawn,      {.v = mediastopcmd } },
+	{ 0,                XF86XK_MonBrightnessUp,    spawn,      {.v = brightnessupcmd } },
+	{ 0,                XF86XK_MonBrightnessDown,  spawn,      {.v = brightnessdwcmd } },
 };
 
 /* button definitions */
