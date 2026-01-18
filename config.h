@@ -41,7 +41,6 @@ static const Rule rules[] = {
 	{ "copyq",        "copyq",      NULL,       0,          1,           -1 },
 	{ "Gpick",        "gpick",      NULL,       0,          1,           -1 },
 	{ "discord",      "discord",    NULL,       1 << 8,     0,           -1 },
-	{ "firetify",     NULL,         NULL,       1 << 8,     0,           -1 }, // firefox with spotify opened
 	{ "qalculate-qt", "qalculate",  NULL,       0,          1,           -1 },
 	{ "krename",      "krename",    NULL,       0,          1,           -1 },
 	{ "st",           "floatst",    NULL,       0,          1,           -1 },
