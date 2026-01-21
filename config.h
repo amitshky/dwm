@@ -77,7 +77,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/dmenu.sh", NULL };
+static const char *dmenucmd[] = { "/usr/bin/env", "bash", "-c", "dmenu_script", NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *floattermcmd[]  = { "st", "-n", "floatst", NULL };
 
@@ -89,7 +89,7 @@ static const char *browsercmd[] = { "firefox", NULL };
 static const char *screenshotcmd[]  = { "flameshot", "gui", NULL };
 static const char *clipboardcmd[]   = { "copyq", "show", NULL };
 static const char *colorpickercmd[] = { "gpick", "-p", NULL };
-static const char *calculatorcmd[]  = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/calculator.sh", NULL };
+static const char *calculatorcmd[]  = { "/usr/bin/env", "bash", "-c", "dmenu_calculator", NULL };
 static const char *renamecmd[]  = { "krename", NULL };
 
 /* applications */
@@ -99,8 +99,8 @@ static const char *processmgrcmd[] = { "st", "-e", "btop", NULL };
 static const char *colorpickerwincmd[] = { "gpick", NULL };
 
 /* scripts */
-static const char *powermenucmd[] = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/powermenu", NULL };
-static const char *cleanupcmd[]   = { "/usr/bin/env", "bash", "-c", "$HOME/dev/config/scripts/linux/cleanup.sh && $HOME/dev/config/scripts/linux/volumeLevel.sh", NULL };
+static const char *powermenucmd[] = { "/usr/bin/env", "bash", "-c", "powermenu", NULL };
+static const char *cleanupcmd[]   = { "/usr/bin/env", "bash", "-c", "volume_level", NULL };
 
 /* audio controls */
 static const char *volupcmd[]   = { "/usr/bin/env", "bash", "-c", "pactl set-sink-volume 0 +5%", NULL };
