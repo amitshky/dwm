@@ -82,7 +82,7 @@ static const char *termcmd[]  = { "st", NULL };
 static const char *floattermcmd[]  = { "st", "-n", "floatst", NULL };
 
 /* quick launch */
-static const char *filemancmd[] = { "pcmanfm", NULL };
+static const char *filemancmd[] = { "dolphin", NULL };
 static const char *browsercmd[] = { "firefox", NULL };
 
 /* tools */
