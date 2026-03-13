@@ -90,7 +90,7 @@ static const char *screenshotcmd[]  = { "flameshot", "gui", NULL };
 static const char *clipboardcmd[]   = { "copyq", "show", NULL };
 static const char *colorpickercmd[] = { "gpick", "-p", NULL };
 static const char *calculatorcmd[]  = { "/usr/bin/env", "bash", "-c", "dmenu_calculator", NULL };
-static const char *renamecmd[]  = { "krename", NULL };
+static const char *renamecmd[]      = { "krename", NULL };
 
 /* applications */
 /*static const char *soundmixercmd[] = { "st", "-e", "pulsemixer", NULL };*/
@@ -99,6 +99,7 @@ static const char *processmgrcmd[] = { "st", "-e", "btop", NULL };
 static const char *colorpickerwincmd[] = { "gpick", NULL };
 
 /* scripts */
+static const char *displaycmd[]     = { "dmenu_display", NULL };
 static const char *powermenucmd[] = { "/usr/bin/env", "bash", "-c", "powermenu", NULL };
 static const char *cleanupcmd[]   = { "/usr/bin/env", "bash", "-c", "cleanup && volume_level", NULL };
 
@@ -167,6 +168,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Escape,     spawn,      {.v = processmgrcmd } },
 	{ MODKEY,                       XK_F2,         spawn,      {.v = renamecmd } },
 	{ MODKEY,                       XK_r,          spawn,      {.v = renamecmd } },
+	{ MODKEY,                       XK_p,          spawn,      {.v = displaycmd } },
 
 	/* media controls */
 	{ 0,                XF86XK_AudioRaiseVolume,   spawn,      {.v = volupcmd } },
