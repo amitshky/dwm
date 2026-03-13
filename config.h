@@ -99,7 +99,7 @@ static const char *processmgrcmd[] = { "st", "-e", "btop", NULL };
 static const char *colorpickerwincmd[] = { "gpick", NULL };
 
 /* scripts */
-static const char *displaycmd[]     = { "dmenu_display", NULL };
+static const char *displaycmd[]   = { "/usr/bin/env", "bash", "-c", "dmenu_display", NULL };
 static const char *powermenucmd[] = { "/usr/bin/env", "bash", "-c", "powermenu", NULL };
 static const char *cleanupcmd[]   = { "/usr/bin/env", "bash", "-c", "cleanup && volume_level", NULL };
 
