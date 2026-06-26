@@ -99,9 +99,10 @@ static const char *processmgrcmd[] = { "st", "-e", "btop", NULL };
 static const char *colorpickerwincmd[] = { "gpick", NULL };
 
 /* scripts */
-static const char *displaycmd[]   = { "/usr/bin/env", "bash", "-c", "dmenu_display", NULL };
-static const char *powermenucmd[] = { "/usr/bin/env", "bash", "-c", "powermenu", NULL };
-static const char *cleanupcmd[]   = { "/usr/bin/env", "bash", "-c", "volume_level && cleanup", NULL };
+static const char *displaycmd[]    = { "/usr/bin/env", "bash", "-c", "dmenu_display", NULL };
+static const char *powermenucmd[]  = { "/usr/bin/env", "bash", "-c", "powermenu", NULL };
+static const char *lockscreencmd[] = { "/usr/bin/env", "bash", "-c", "lockscreen", NULL };
+static const char *cleanupcmd[]    = { "/usr/bin/env", "bash", "-c", "volume_level && cleanup", NULL };
 
 /* audio controls */
 static const char *volupcmd[]   = { "/usr/bin/env", "bash", "-c", "pactl set-sink-volume 0 +5%", NULL };
@@ -131,6 +132,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY|ShiftMask|ControlMask, XK_q,      quit,           {0} },
 	{ MODKEY|ShiftMask,             XK_q,      spawn,          {.v = powermenucmd } },
+	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = lockscreencmd } },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
