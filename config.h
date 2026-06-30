@@ -161,7 +161,6 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_s,          spawn,      {.v = screenshotcmd } },
 	{ 0,                            PRINTSCREEN,   spawn,      {.v = screenshotcmd } },
 	{ MODKEY,                       XK_v,          spawn,      {.v = clipboardcmd } },
-	{ ALTKEY,                       XK_v,          spawn,      {.v = clipboardcmd } },
 	{ MODKEY,                       XK_c,          spawn,      {.v = calculatorcmd } },
 	{ MODKEY|ControlMask,           XK_c,          spawn,      {.v = calendarcmd } },
 	{ MODKEY|ALTKEY,                XK_c,          spawn,      {.v = cleanupcmd } },
