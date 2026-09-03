@@ -84,6 +84,7 @@ static const char *floattermcmd[]  = { "st", "-n", "floatst", NULL };
 /* quick launch */
 static const char *filemancmd[] = { "dolphin", "-stylesheet", "~/.config/qt/dolpin-darkmode-fix.qss", NULL };
 static const char *browsercmd[] = { "firefox", NULL };
+static const char *browser2cmd[] = { "lirefox", NULL };
 
 /* tools */
 static const char *screenshotcmd[]  = { "flameshot", "gui", NULL };
@@ -160,6 +161,7 @@ static const Key keys[] = {
 	/* custom keymaps */
 	{ MODKEY,                       XK_a,          spawn,      {.v = filemancmd } },
 	{ MODKEY,                       XK_s,          spawn,      {.v = browsercmd } },
+	{ MODKEY|ALTKEY,                XK_s,          spawn,      {.v = browser2cmd } },
 	{ MODKEY|ShiftMask,             XK_s,          spawn,      {.v = screenshotcmd } },
 	{ 0,                            PRINTSCREEN,   spawn,      {.v = screenshotcmd } },
 	{ MODKEY,                       XK_v,          spawn,      {.v = clipboardcmd } },
